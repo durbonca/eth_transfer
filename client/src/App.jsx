@@ -1,6 +1,11 @@
-import { Navbar, Footer, Loader, Services, Transactions, Welcome } from './components'
+import { Navbar, Footer, Loader, Services, Transactions, Welcome } from './components';
 
 const App = () => {
+  const helloYou = (name) => {
+    name = 'you' || name;
+    console.log('hello' + name + '!');
+  };
+
   return (
     <div className="App">
       <Navbar />
@@ -10,7 +15,7 @@ const App = () => {
       <Transactions />
       <Footer />
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
