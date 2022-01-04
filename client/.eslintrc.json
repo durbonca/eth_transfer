@@ -4,6 +4,8 @@
         "es2021": true
     },
     "extends": [
+        "prettier",
+        "eslint-config-prettier",
         "eslint:recommended",
         "plugin:react/recommended"
     ],
@@ -15,6 +17,8 @@
         "sourceType": "module"
     },
     "plugins": [
+        "prettier", 
+        "eslint-plugin-prettier",
         "react"
     ],
     "rules": {

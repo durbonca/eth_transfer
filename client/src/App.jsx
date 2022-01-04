@@ -1,17 +1,14 @@
+import React from 'react';
 import { Navbar, Footer, Loader, Services, Transactions, Welcome } from './components';
 
 const App = () => {
-  const helloYou = (name) => {
-    name = 'you' || name;
-    console.log('hello' + name + '!');
-  };
-
   return (
-    <div className="App">
-      <Navbar />
-      <Welcome />
+    <div className="min-h-screen">
+      <div className="gradient-bg-welcome">
+        <Navbar />
+        <Welcome />
+      </div>
       <Services />
-      <Loader />
       <Transactions />
       <Footer />
     </div>
