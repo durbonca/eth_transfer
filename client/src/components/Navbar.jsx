@@ -1,9 +1,9 @@
-const Navbar = () => {
-    return (
-        <h1>
-            Navbar
-        </h1>
-    )
-}
+import { HiMenuAlt4 } from 'react-icons/hi';
+import { AiOutlineClose } from 'react-icons/ai';
+import logo from '../../images/logo.png';
 
-export default Navbar
+const Navbar = () => {
+  return <nav className="w-full flex md:justify-center justify-between items-center p-4">Navbar</nav>;
+};
+
+export default Navbar;
