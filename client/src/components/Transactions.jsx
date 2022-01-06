@@ -53,7 +53,7 @@ const Transactions = () => {
         )}
         <div className="flex flex-wrap justify-between items-center mt-10">
           {[
-            transactions.reverse().map((transaction, index) => {
+            transactions.map((transaction, index) => {
               return <TransactionCard key={index} {...transaction} />;
             }),
           ]}
