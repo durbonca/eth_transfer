@@ -18,6 +18,8 @@ const getEthereumContract = () => {
 export const TransactionProvider = ({ children }) => {
   const [currentAccount, setCurrentAccount] = useState('');
   const [formData, setFormData] = useState({ addressTo: '', amount: '', keyword: '', message: '' });
+  const [isLoading, setIsLoading] = useState(false);
+  const [transactionCount, setTransactionCount] = useState(localStorage.getItem('transactionCount') || 0);
 
   const handleChange = (e, name) => {
     setFormData((prevState) => ({ ...prevState, [name]: e.target.value }));
@@ -56,7 +58,29 @@ export const TransactionProvider = ({ children }) => {
       if (!ethereum) return alert('please install metamask');
       const { addressTo, amount, keyword, message } = formData;
       const transactionContract = getEthereumContract();
-      // get the data from the form
+      const parsedAmount = ethers.utils.parseEther(amount);
+
+      await ethereum.request({
+        method: 'eth_sendTransaction',
+        params: [
+          {
+            from: currentAccount,
+            to: addressTo,
+            gas: '0x5208', // 21000 GWEI
+            value: parsedAmount._hex,
+          },
+        ],
+      });
+
+      const transactionHash = await transactionContract.addToBlockchain(addressTo, parsedAmount, message, keyword);
+
+      setIsLoading(true);
+      console.log(`loading - ${transactionHash}`);
+      await transactionHash.wait();
+      setIsLoading(false);
+      console.log(`Success - ${transactionHash}`);
+      const transactionCount = await transactionContract.getTransactionCount();
+      setTransactionCount(transactionCount.toNumber());
     } catch (error) {
       console.log(error);
     }
